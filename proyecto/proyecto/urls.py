@@ -24,8 +24,8 @@ urlpatterns = [
 from django.views.generic import RedirectView
 
 urlpatterns += [
-    path('', RedirectView.as_view(url='aplicacion/', permanent=True)),
-    path('aplicacion/', include('aplicacion.urls')),
+    path('', RedirectView.as_view(url='examen/', permanent=True)),
+    path('examen/', include('aplicacion.urls')),
 ]
 
 from django.conf import settings
