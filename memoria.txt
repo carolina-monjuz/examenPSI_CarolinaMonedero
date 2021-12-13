@@ -1,0 +1,50 @@
+El primer paso es clonar el repositorio de github con el comando gti clone https://github.com/carolina-monjuz/examenPSI_CarolinaMonedero.git
+
+Después creamos un entorno virtual e instalamos los requisitos especificados en el archivo requiremetns.txt con el comando pip3 install -r requirements.txt
+
+Creamos el proyecto: django-admin startproject proyecto
+
+Nos metemos en la carpeta del proyecto y creamos una aplicación con nombre "aplicacion" mediante el siguiente comando: python3 manage.py startapp aplicacion
+
+Creamos una base de datos PostreSQL con el siguiente comando: createdb -U alumnodb -h localhost examen
+
+Cambiamos el fichero settings añadiendo las siguientes configuraciones:
+	- En la parte de INSTALLED_APPS añadir: 'aplicacion.apps.AplicacionConfig'
+	- Comentamos lo referente a la parte de DATABASES y la cambiamos por esta nueva donde se
+	  nos permite usar la aplicación tanto de forma local como en heroku sin problemas y que 
+	  no interfieran las bases de datos para cada cosa:
+		DATABASES = {}
+		if os.getenv('SQLITE', False):
+    			DATABASES['default'] = {
+    				 'ENGINE': 'django.db.backends.sqlite3',
+     				'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     			}
+		else:
+   			DATABASES['default'] = dj_database_url.config(default='postgres://alumnodb:alumnodb@localhost:5432/examen', conn_max_age=500) 
+
+Una vez cambiado esto, creamos los modelos en el fichero models.py. 
+Seguidamente registramos los modelos en el fichero admin.py:
+	from django.contrib import admin
+	from .models import Cliente, Habitacion, Ocupacion
+	# Register your models here.
+	
+	admin.site.register(Cliente)
+	admin.site.register(Habitacion)
+	admin.site.register(Ocupacion)
+
+Ya con los modelos registrados, realizamos las migraciones (primero :python3 manage.py makemigrations, y después: python3 manage.py migrate) y creamos el superusuario con el comando python2 manage.py createsuperuser con nombre y contraseña alumnodb.
+
+Probamos que funciona la interfaz del administrador arrancando el servidor: python3 manage.py runserver 8001 y navegando a la direccion siguiente: http://127.0.0.1:8001/admin/
+
+Para poblar la base de datos creamos un script dentro de la carpeta commands que a su vez está dentro de la carpeta management en el directorio de la aplicacion. En él se crean los datos pedidos en el enunciado del examen cuando se ejecute el comando python3 manage.py poblar
+Si ejecutamos el comando psql -U postgres -d examen y despues tecleamos \dt y pulsamos enter, podemos ver como los datos persisten en la base de datos creada.
+
+
+
+
+
+
+
+
+
+
