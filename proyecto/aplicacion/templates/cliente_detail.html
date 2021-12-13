@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        Ocupaciones del cliente {{ cliente.nombreCliente }}
+        <table>
+            <tr>
+                <th>Numero de habitacion</th>
+                <th>Numero de camas</th>
+                <th>Dia Entrada</th>
+                <th>Dia Salida</th>
+            </tr>
+            {% for ocupacion in ocupaciones %}
+            <tr>
+                <td>{{ ocupacion.habitacion.id }}</td>
+                <td>{{ ocupacion.habitacion.numeroCamas }}</td>
+                <td>{{ ocupacion.fechaEntrada }}</td>
+                <td>{{ ocupacion.fechaSalida }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

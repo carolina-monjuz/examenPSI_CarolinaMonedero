@@ -39,6 +39,20 @@ Probamos que funciona la interfaz del administrador arrancando el servidor: pyth
 Para poblar la base de datos creamos un script dentro de la carpeta commands que a su vez está dentro de la carpeta management en el directorio de la aplicacion. En él se crean los datos pedidos en el enunciado del examen cuando se ejecute el comando python3 manage.py poblar
 Si ejecutamos el comando psql -U postgres -d examen y despues tecleamos \dt y pulsamos enter, podemos ver como los datos persisten en la base de datos creada.
 
+Para crear la vista en la que se muestran los detalles de las ocupaciones de un cliente específico, se debe crear una vista en el fichero views.py en aplicacion. En este fichero lo que haremos será crear esa vista donde le pasaremos al template cliente_detail.html una lista con las ocupaciones. Para que todo esto funcione, además de completar el template con el nombre de la lista que se le pasa como contexto (ocupaciones) se deberá crear el fichero urls.py en el directorio aplicacion donde especificaremos la url de la página en cuestión:
+
+	from django.urls import path
+	from django.urls.conf import include, include
+	from . import views
+
+	app_name = 'aplicacion'
+
+	urlpatterns = [
+	    	path('cliente/<int:pk>/', views.cliente_detail, name='cliente'),
+	
+	]
+Mediante el <int:pk> pasaremos a la vista como argumento el identificador del cliente del cual queremos ver su información. 
+
 
 
 

@@ -5,6 +5,7 @@ from . import views
 app_name = 'aplicacion'
 
 urlpatterns = [
-    
+    path('cliente/<int:pk>/', views.cliente_detail, name='cliente'),
+
 ]
 
