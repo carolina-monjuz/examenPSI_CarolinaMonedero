@@ -53,7 +53,7 @@ Para crear la vista en la que se muestran los detalles de las ocupaciones de un 
 	]
 Mediante el <int:pk> pasaremos a la vista como argumento el identificador del cliente del cual queremos ver su información. 
 
-
+Si ponemos lo siguiente http://127.0.0.1:8001/examen/cliente/1001/ nos aparecera la informacion del cliente 1001
 
 
 
